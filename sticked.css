@@ -1,0 +1,5 @@
+.navigation--sticked {
+  position: sticky;
+  top: 0px;
+  z-index: var(--navigation-sticked-z-index, 10);
+}

@@ -1,0 +1,57 @@
+@import './settings';
+@import '@economist/component-sections-card';
+
+:root {
+  --icon-height: 28px;
+  --main-navigation-link-padding: 2em;
+}
+
+.navigation__main-navigation-link.balloon {
+  position: static;
+}
+
+.navigation__main-navigation-link {
+   align-self: center;
+   font-size: var(--navigation-text-size);
+   padding: 0 var(--main-navigation-link-padding);
+ }
+
+.navigation__main-navigation-link,
+.navigation__main-navigation-link > a {
+  color: var(--navigation-link-color);
+  white-space: nowrap;
+}
+
+.navigation__sections-link {
+  position: relative;
+}
+
+.navigation__main-navigation-link--not-visible .balloon-content {
+  display: none;
+}
+
+@media (--mobile-down) {
+  .navigation__main-navigation-link {
+    display: none !important;
+  }
+}
+
+.navigation__main-navigation-link,
+.navigation__sections-link {
+  display: flex;
+  align-items: center;
+}
+
+/* IE9 Flexbox fallback */
+.navigation__primary {
+  display: table;
+}
+
+.navigation__primary-inner {
+  display: table-row;
+}
+
+.navigation__primary-inner > :not(.navigation__user-menu) {
+  display: table-cell;
+  vertical-align: middle;
+}
