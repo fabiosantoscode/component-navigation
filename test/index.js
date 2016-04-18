@@ -4,17 +4,18 @@ import React from 'react';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import links from './links';
+import moreBalloonData from './more-balloon-data';
 import { mount } from 'enzyme';
-import navigationLinks from '@economist/component-sections-card/lib/context';
+import sectionsCardData from '@economist/component-sections-card/lib/context';
 chai.use(chaiEnzyme()).should();
 describe('Navigation', () => {
   let props = null;
   let registered = null;
   beforeEach(() => {
     props = {
+      moreBalloonData,
+      sectionsCardData,
       links: registered,
-      sectionsCardData: navigationLinks,
-      moreBalloonData: {},
       accordionData: [
         {
           title: 'Topics',

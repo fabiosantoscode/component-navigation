@@ -12,6 +12,7 @@
 .navigation__user-menu .icon--user-thimphu {
   padding-left: 30px;
   background-position: left center;
+  background-repeat: no-repeat;
   background-size: 24px 24px;
 }
 
@@ -55,6 +56,10 @@
   clear: both;
   display: block;
   margin: 0 auto 2em;
+  padding:
+    var(--navigation__user-menu-log-in-button-padding-vertical, var(--grid-spacing-rabbit))
+    var(--navigation__user-menu-log-in-button-padding-vertical, var(--grid-gutter-xl));
+  color: var(--navigation__user-menu-log-in-button-color, var(--color-thimphu));
   font-weight: bold;
   text-align: center;
   background: var(--navigation__user-menu-background-color, var(--color-chicago));

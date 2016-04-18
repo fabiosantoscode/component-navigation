@@ -1,5 +1,4 @@
 logs
-*.log
 npm-debug.log*
 pids
 *.pid
@@ -24,7 +23,6 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
-Icon
 ._*
 .DocumentRevisions-V100
 .fseventsd
@@ -43,3 +41,5 @@ Temporary Items
 lib/
 site/
 site
+*.log
+Icon

@@ -10,38 +10,6 @@ import SectionsCard from '@economist/component-sections-card';
 import StickyPosition from 'react-sticky-position';
 
 export default class Navigation extends React.Component {
-
-  static propTypes = {
-    className: React.PropTypes.string,
-    children: React.PropTypes.oneOfType([
-      React.PropTypes.arrayOf(React.PropTypes.element),
-      React.PropTypes.element,
-    ]),
-    links: React.PropTypes.arrayOf(React.PropTypes.object),
-    penName: React.PropTypes.string,
-    svgUri: React.PropTypes.string,
-    userLoggedIn: React.PropTypes.bool,
-    userIsSubscriber: React.PropTypes.bool,
-    currentUrl: React.PropTypes.string,
-    sharedMenu: React.PropTypes.shape({
-      topic: React.PropTypes.shape({
-        title: React.PropTypes.string,
-        href: React.PropTypes.string,
-      }),
-      more: React.PropTypes.shape({
-        title: React.PropTypes.string,
-        href: React.PropTypes.string,
-      }),
-      subscribe: React.PropTypes.shape({
-        title: React.PropTypes.string,
-        href: React.PropTypes.string,
-      }),
-    }).isRequired,
-    sectionsCardData: SectionsCard.propTypes.data,
-    accordionData: Accordion.propTypes.list,
-    moreBalloonData: SectionsCard.propTypes.data,
-  }
-
   static defaultProps = {
     penName: 'guest-olejses',
   }
@@ -323,4 +291,37 @@ export default class Navigation extends React.Component {
       </StickyPosition>
     );
   }
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  Navigation.propTypes = {
+    className: React.PropTypes.string,
+    children: React.PropTypes.oneOfType([
+      React.PropTypes.arrayOf(React.PropTypes.element),
+      React.PropTypes.element,
+    ]),
+    links: React.PropTypes.arrayOf(React.PropTypes.object),
+    penName: React.PropTypes.string,
+    svgUri: React.PropTypes.string,
+    userLoggedIn: React.PropTypes.bool,
+    userIsSubscriber: React.PropTypes.bool,
+    currentUrl: React.PropTypes.string,
+    sharedMenu: React.PropTypes.shape({
+      topic: React.PropTypes.shape({
+        title: React.PropTypes.string,
+        href: React.PropTypes.string,
+      }),
+      more: React.PropTypes.shape({
+        title: React.PropTypes.string,
+        href: React.PropTypes.string,
+      }),
+      subscribe: React.PropTypes.shape({
+        title: React.PropTypes.string,
+        href: React.PropTypes.string,
+      }),
+    }).isRequired,
+    sectionsCardData: SectionsCard.propTypes.data,
+    accordionData: Accordion.propTypes.list,
+    moreBalloonData: SectionsCard.propTypes.data,
+  };
 }
