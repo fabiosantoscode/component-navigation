@@ -231,12 +231,6 @@ export default class Navigation extends React.Component {
           <a href="http://www.economist.com" className="navigation__link-logo">
             <Icon icon="economist" size="64px" {...svgUri} />
           </a>
-          <Balloon
-            className="navigation__main-navigation-link navigation__mobile-accordion"
-            trigger={menuAccordionTrigger}
-          >
-            <Accordion list={accordionData} />
-          </Balloon>
           <MenuTopic
             href={this.props.sharedMenu.topic.href}
             sectionsCardData={this.props.sectionsCardData}
@@ -274,6 +268,12 @@ export default class Navigation extends React.Component {
           <div className="navigation__search">
             {this.renderSearch(searching)}
           </div>
+          <Balloon
+            className="navigation__main-navigation-link navigation__mobile-accordion"
+            trigger={menuAccordionTrigger}
+          >
+            <Accordion list={accordionData} />
+          </Balloon>
         </div>
       </div>
     ) ];
