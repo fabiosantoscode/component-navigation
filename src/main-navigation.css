@@ -35,8 +35,10 @@
   text-decoration: none;
 }
 
-.navigation__main-navigation-link-subscribe {
-  font-family: var(--fontfamily-sans);
+@media (--navigation-small-mobile-down) {
+  .navigation .navigation__main-navigation-link-subscribe {
+    display: none;
+  }
 }
 
 .navigation__main-sections-card .balloon-content {
