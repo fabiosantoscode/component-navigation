@@ -1,14 +1,15 @@
+import React from 'react';
+import classnames from 'classnames';
+import StickyPosition from 'react-sticky-position';
 import Accordion from '@economist/component-accordion';
 import Balloon from '@economist/component-balloon';
 import Button from '@economist/component-link-button';
 import GoogleSearch from '@economist/component-google-search';
 import Icon from '@economist/component-icon';
+import SectionsCard from '@economist/component-sections-card';
 import IconLink from './parts/menu-icon-link';
 import MenuMore from './parts/menu-more';
 import MenuTopic from './parts/menu-topic';
-import React from 'react';
-import SectionsCard from '@economist/component-sections-card';
-import StickyPosition from 'react-sticky-position';
 
 export default class Navigation extends React.Component {
   static defaultProps = {
@@ -17,7 +18,7 @@ export default class Navigation extends React.Component {
 
   constructor(props) {
     super(props);
-    this.closeSearchBar = this.closeSearchBar.bind(this);
+    this.handleCloseSearchBarClick = this.handleCloseSearchBarClick.bind(this);
     this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
     this.state = {
       searching: false,
@@ -159,31 +160,49 @@ export default class Navigation extends React.Component {
         href="/search"
         icon="magnifier"
         onClick={this.handleSearchButtonClick}
+        className="navigation__main-navigation--desktop"
       >
         Search
       </IconLink>
     );
   }
 
-  renderSearchBar() {
-    /* eslint-disable react/jsx-handler-names */
+  renderSearchBar({
+    autoFocus = true,
+    renderCloseButton = true,
+    onCloseClick,
+    className,
+    swapMagnifierAndSearchBar,
+  } = {}) {
+    const closeButton = renderCloseButton ? (
+      <div className="navigation__search-close-button-wrapper">
+        <Button
+          unstyled
+          className="navigation__search-close-button"
+          icon={{ icon: 'close', color: 'thimphu', useBackground: true }}
+          onClick={onCloseClick}
+        />
+      </div>
+    ) : null;
+    let magnifier = (
+      <div className="navigation__search-magnifier icon--background icon--magnifier-london"></div>
+    );
+    let searchBar = (
+      <GoogleSearch autoFocus={autoFocus} />
+    );
+    if (swapMagnifierAndSearchBar) {
+      [ magnifier, searchBar ] = [ searchBar, magnifier ];
+    }
     return (
-      <div className="navigation__search navigation__search--top-of-page">
-        <div className="navigation__search-magnifier icon--background icon--magnifier-london"></div>
-        <GoogleSearch autoFocus />
-        <div className="navigation__search-close-button-wrapper">
-          <Button
-            unstyled
-            className="navigation__search-close-button"
-            icon={{ icon: 'close', color: 'thimphu', useBackground: true }}
-            onClick={this.closeSearchBar}
-          />
-        </div>
+      <div className={classnames('navigation__search', className)}>
+        {magnifier}
+        {searchBar}
+        {closeButton}
       </div>
     );
   }
 
-  closeSearchBar() {
+  handleCloseSearchBarClick() {
     this.setState({ searching: false });
   }
 
@@ -257,7 +276,15 @@ export default class Navigation extends React.Component {
           className="navigation__main-navigation-link navigation__mobile-accordion"
           trigger={menuAccordionTrigger}
         >
-          <Accordion list={accordionData} />
+          <div>
+            {this.renderSearchBar({
+              autoFocus: false,
+              renderCloseButton: false,
+              className: 'navigation__search--inline',
+              swapMagnifierAndSearchBar: true,
+            })}
+            <Accordion list={accordionData} />
+          </div>
         </Balloon>
       </div>
     );
@@ -266,9 +293,16 @@ export default class Navigation extends React.Component {
   render() {
     const { searching } = this.state;
 
+    const primaryContent = searching ?
+      this.renderSearchBar({
+        className: 'navigation__search--top-of-page',
+        onCloseClick: this.handleCloseSearchBarClick,
+      }) :
+      this.renderPrimaryNavigation();
+
     const children = [ (
       <div className="navigation__primary" key="primary-navigation">
-        {searching ? this.renderSearchBar() : this.renderPrimaryNavigation()}
+        {primaryContent}
       </div>
     ) ];
     if (this.props.children) {

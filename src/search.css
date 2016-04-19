@@ -40,6 +40,14 @@
   background-size: 24px 24px;
 }
 
+.navigation__search--inline .google-search {
+  width: 100%;
+}
+
+.navigation__search--inline .navigation__search-magnifier {
+  min-width: var(--search__close-button-height, 64px);
+}
+
 .navigation__search-close-button-wrapper {
   width: var(--search__close-button-height, 64px);
   color: var(--search__color, var(--color-thimphu));
