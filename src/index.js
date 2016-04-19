@@ -3,6 +3,7 @@ import Balloon from '@economist/component-balloon';
 import Button from '@economist/component-link-button';
 import GoogleSearch from '@economist/component-google-search';
 import Icon from '@economist/component-icon';
+import IconLink from './parts/menu-icon-link';
 import MenuMore from './parts/menu-more';
 import MenuTopic from './parts/menu-topic';
 import React from 'react';
@@ -17,7 +18,7 @@ export default class Navigation extends React.Component {
   constructor(props) {
     super(props);
     this.closeSearchBar = this.closeSearchBar.bind(this);
-    this.openSearchBar = this.openSearchBar.bind(this);
+    this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
     this.state = {
       searching: false,
     };
@@ -31,12 +32,12 @@ export default class Navigation extends React.Component {
     const buttonText = userLoggedIn ? 'My Account' : 'Log in';
     const registerUrl = `/user/register${ destinationParameter }`;
     const userMenuBalloonTrigger = (
-      <Button
+      <IconLink
         href={loginLogoutUrl}
         className={`navigation__user-menu-link navigation__user-menu-link--${ buttonClassSuffix }`}
-        icon={{ icon: 'user', color: 'thimphu', useBackground: true }}
-        unstyled
-      ><span className="navigation__user-menu-link-label">{buttonText}</span></Button>
+        icon="user"
+        labelClassName="navigation__user-menu-link-label"
+      >{buttonText}</IconLink>
     );
     if (userLoggedIn && userIsSubscriber) {
       return (
@@ -152,64 +153,48 @@ export default class Navigation extends React.Component {
     );
   }
 
-  renderSearch(searching) {
-    /* eslint-disable react/jsx-handler-names */
-    if (searching) {
-      return (
-        <div className="navigation__search--open">
-          <div className="navigation__search-magnifier">
-            <Icon icon="magnifier" size="28px" />
-          </div>
-          <GoogleSearch />
-          <div className="navigation__search-close-button-wrapper">
-            <Button
-              unstyled
-              className="navigation__search-close-button"
-              icon={{ icon: 'close', color: 'thimphu', useBackground: true }}
-              onClick={this.closeSearchBar}
-            />
-          </div>
-        </div>
-      );
-    }
+  renderSearchButton() {
     return (
-      <div className="navigation__search--closed">
-        <div className="navigation__show-field-group">
+      <IconLink
+        href="/search"
+        icon="magnifier"
+        onClick={this.handleSearchButtonClick}
+      >
+        Search
+      </IconLink>
+    );
+  }
+
+  renderSearchBar() {
+    /* eslint-disable react/jsx-handler-names */
+    return (
+      <div className="navigation__search navigation__search--top-of-page">
+        <div className="navigation__search-magnifier icon--background icon--magnifier-london"></div>
+        <GoogleSearch autoFocus />
+        <div className="navigation__search-close-button-wrapper">
           <Button
             unstyled
-            icon={{ icon: 'magnifier', size: '28px' }}
-            className="navigation__collapsed-magnifier"
-            href="http://www.economist.com/search/"
-            onClick={this.openSearchBar}
+            className="navigation__search-close-button"
+            icon={{ icon: 'close', color: 'thimphu', useBackground: true }}
+            onClick={this.closeSearchBar}
           />
-          <Button
-            unstyled
-            icon={{ icon: 'magnifier', color: 'thimphu', useBackground: true }}
-            className="navigation__search-open-button"
-            href="http://www.economist.com/search/"
-            onClick={this.openSearchBar}
-          >
-            Search
-          </Button>
         </div>
       </div>
     );
-    /* eslint-enable react/jsx-handler-names */
   }
 
   closeSearchBar() {
     this.setState({ searching: false });
   }
 
-  openSearchBar(event) {
+  handleSearchButtonClick(event) {
     event.stopPropagation();
     event.preventDefault();
     this.setState({ searching: true });
     return false;
   }
 
-  render() {
-    const { searching } = this.state;
+  renderPrimaryNavigation() {
     const { userIsSubscriber } = this.props;
     let { accordionData } = this.props;
     const svgUri = { uri: this.props.svgUri } || {};
@@ -220,61 +205,70 @@ export default class Navigation extends React.Component {
     }
 
     const menuAccordionTrigger = (
-      <a href="/Sections" className="navigation__sections-link navigation--tappable-icon">
+      <a
+        href="/sections"
+        className="navigation__main-navigation-link navigation__sections-link navigation--tappable-icon"
+      >
         <Icon icon="hamburger" size="28px" color="white" />
         <Icon icon="close" size="28px" color="white" />
       </a>
     );
+    return (
+      <div className="navigation__primary-inner">
+        <a href="http://www.economist.com" className="navigation__link-logo">
+          <Icon icon="economist" size="64px" {...svgUri} />
+        </a>
+        <MenuTopic
+          href={this.props.sharedMenu.topic.href}
+          sectionsCardData={this.props.sectionsCardData}
+          title={this.props.sharedMenu.topic.title}
+        />
+        <a href="/printedition"
+          className="navigation__main-navigation-link navigation__main-navigation--desktop"
+        >
+          Print edition
+        </a>
+        <MenuMore
+          moreBalloonData={this.props.moreBalloonData}
+          href={this.props.sharedMenu.more.href}
+          title={this.props.sharedMenu.more.title}
+        />
+        <div className="navigation__primary-expander" />
+        {
+          userIsSubscriber ? null : (
+            <Button href={this.props.sharedMenu.subscribe.href}
+              className="navigation__main-navigation-link navigation__main-navigation-link-subscribe"
+              target="_blank"
+              i13nModel={{
+                action: 'click',
+                element: 'subscribe',
+              }}
+              unstyled
+            >
+              {this.props.sharedMenu.subscribe.title}
+            </Button>
+          )
+        }
+        <div className="navigation__user-menu">
+          {this.renderLoginLogout()}
+        </div>
+        {this.renderSearchButton()}
+        <Balloon
+          className="navigation__main-navigation-link navigation__mobile-accordion"
+          trigger={menuAccordionTrigger}
+        >
+          <Accordion list={accordionData} />
+        </Balloon>
+      </div>
+    );
+  }
+
+  render() {
+    const { searching } = this.state;
+
     const children = [ (
       <div className="navigation__primary" key="primary-navigation">
-        <div className="navigation__primary-inner">
-          <a href="http://www.economist.com" className="navigation__link-logo">
-            <Icon icon="economist" size="64px" {...svgUri} />
-          </a>
-          <MenuTopic
-            href={this.props.sharedMenu.topic.href}
-            sectionsCardData={this.props.sectionsCardData}
-            title={this.props.sharedMenu.topic.title}
-          />
-          <a href="/printedition"
-            className="navigation__main-navigation-link navigation__main-navigation--desktop"
-          >
-            Print edition
-          </a>
-          <MenuMore
-            moreBalloonData={this.props.moreBalloonData}
-            href={this.props.sharedMenu.more.href}
-            title={this.props.sharedMenu.more.title}
-          />
-          <div className="navigation__primary-expander" />
-          {
-            userIsSubscriber ? null : (
-              <Button href={this.props.sharedMenu.subscribe.href}
-                className="navigation__main-navigation-link navigation__main-navigation-link-subscribe"
-                target="_blank"
-                i13nModel={{
-                  action: 'click',
-                  element: 'subscribe',
-                }}
-                unstyled
-              >
-                {this.props.sharedMenu.subscribe.title}
-              </Button>
-            )
-          }
-          <div className="navigation__user-menu">
-            {this.renderLoginLogout()}
-          </div>
-          <div className="navigation__search">
-            {this.renderSearch(searching)}
-          </div>
-          <Balloon
-            className="navigation__main-navigation-link navigation__mobile-accordion"
-            trigger={menuAccordionTrigger}
-          >
-            <Accordion list={accordionData} />
-          </Balloon>
-        </div>
+        {searching ? this.renderSearchBar() : this.renderPrimaryNavigation()}
       </div>
     ) ];
     if (this.props.children) {

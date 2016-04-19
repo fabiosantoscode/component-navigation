@@ -7,32 +7,21 @@
   --main-navigation-link-padding: 2em;
 }
 
-.navigation__main-navigation-link {
+.navigation__main-navigation-link,
+.navigation__main-navigation-link-button {
+  display: block;
+  height: var(--navigation__default-height);
   padding: 0 var(--main-navigation-link-padding);
-  align-self: center;
   color: var(--navigation-link-color);
   font-size: var(--navigation-text-size);
+  line-height: var(--navigation__default-height);
+  text-decoration: none;
   white-space: nowrap;
 
   @media (--navigation-tablet-down) and (--navigation-mobile-up) {
     padding-right: 1.8em;
     padding-left: 1.8em;
   }
-}
-
-/* stylelint-disable selector-no-type */
-
-.navigation__main-navigation-link > a {
-  /* stylelint-enable selector-no-type  */
-  color: var(--navigation-link-color);
-  white-space: nowrap;
-}
-
-.navigation__sections-link {
-  position: relative;
-  height: 100%;
-  color: var(--color-thimphu);
-  text-decoration: none;
 }
 
 @media (--navigation-small-mobile-down) {
@@ -64,10 +53,37 @@
   }
 }
 
-.navigation__main-navigation-link,
-.navigation__sections-link {
+/* stylelint-disable selector-no-universal */
+
+.navigation__main-navigation-link > * {
+
+  /* Some links are balloons, so they have children, which is why we need to reset this. */
+
+  line-height: normal;
+}
+
+/* stylelint-enable selector-no-universal */
+
+.navigation__main-navigation-link {
   display: flex;
   align-items: center;
+}
+
+/* Using specificity of 2 because component-icon overrides entire background property */
+
+.navigation__main-navigation-link-button.link-button {
+  padding-left: 30px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+}
+
+.navigation__main-navigation-link-label {
+  line-height: var(--navigation__default-height, 64px);
+
+  @media (--navigation-small-mobile-down) {
+    display: none;
+  }
 }
 
 .navigation__primary {
@@ -84,7 +100,6 @@
 .navigation__primary-inner {
   display: table-row;
   display: flex;
-  position: relative;
   height: var(--navigation__default-height);
 }
 
@@ -97,13 +112,6 @@
 }
 
 /* stylelint-enable declaration-block-no-duplicate-properties, selector-no-universal */
-
-.navigation__user-menu-link-label {
-
-  @media (--navigation-small-mobile-down) {
-    display: none;
-  }
-}
 
 .navigation__user-menu {
 
@@ -142,3 +150,4 @@
     left: 0;
   }
 }
+
