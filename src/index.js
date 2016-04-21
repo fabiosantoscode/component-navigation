@@ -160,7 +160,7 @@ export default class Navigation extends React.Component {
         href="/search"
         icon="magnifier"
         onClick={this.handleSearchButtonClick}
-        className="navigation__main-navigation--desktop"
+        className="navigation__main-navigation--desktop navigation__main-navigation-link--search"
       >
         Search
       </IconLink>

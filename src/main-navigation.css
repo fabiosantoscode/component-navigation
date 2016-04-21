@@ -19,8 +19,35 @@
   white-space: nowrap;
 
   @media (--navigation-tablet-down) and (--navigation-mobile-up) {
-    padding-right: 1.8em;
-    padding-left: 1.8em;
+    padding-right: var(--main-navigation-link-padding-mobile, 1.8em);
+    padding-left: var(--main-navigation-link-padding-mobile, 1.8em);
+  }
+}
+
+/* Using specificity of 2 because component-icon overrides entire background property */
+
+.navigation__main-navigation-link-button.link-button {
+  padding-right: calc(var(--main-navigation-link-padding) + var(--main-navigation-icon-link-padding-nudge, -0.2em));
+  padding-left: var(--main-navigation-link-icon-padding, 30px);
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: var(--main-navigation-link-icon-size, 24px) var(--main-navigation-link-icon-size, 24px);
+
+  @media (--navigation-tablet-down) and (--navigation-mobile-up) {
+    /* stylelint-disable */
+    /* Shut up stylelint, this is beautiful. */
+    padding-right: calc(
+      var(--main-navigation-link-padding-mobile, 1.8em) + var(--main-navigation-icon-link-padding-nudge, -0.2em)
+    );
+    /* stylelint-enable */
+  }
+}
+
+.navigation__main-navigation-link-label {
+  line-height: var(--navigation__default-height, 64px);
+
+  @media (--navigation-small-mobile-down) {
+    display: none;
   }
 }
 
@@ -69,23 +96,6 @@
   align-items: center;
 }
 
-/* Using specificity of 2 because component-icon overrides entire background property */
-
-.navigation__main-navigation-link-button.link-button {
-  padding-left: 30px;
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-}
-
-.navigation__main-navigation-link-label {
-  line-height: var(--navigation__default-height, 64px);
-
-  @media (--navigation-small-mobile-down) {
-    display: none;
-  }
-}
-
 .navigation__primary {
   display: table;
   width: 100%;
@@ -118,6 +128,12 @@
   @media (--navigation-small-mobile-down) {
     padding: 0;
   }
+}
+
+/* TODO omg specificity of 3! how! */
+
+.navigation .navigation__main-navigation-link-button.navigation__main-navigation-link--search {
+  padding-right: 30px;
 }
 
 .navigation__user-menu-link.link-button--icon-background {
