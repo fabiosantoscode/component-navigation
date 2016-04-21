@@ -11,8 +11,11 @@ chai.use(chaiEnzyme()).should();
 describe('Navigation', () => {
   let props = null;
   let registered = null;
+  let testNumber = 0;
   beforeEach(() => {
+    testNumber++;
     props = {
+      googleSearchDivIDPrefix: `test-${ testNumber }-`,
       moreBalloonData,
       sectionsCardData,
       links: registered,
