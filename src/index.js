@@ -214,6 +214,10 @@ export default class Navigation extends React.Component {
     return false;
   }
 
+  googleSearchDivID(suffix) {
+    return `${ this.props.googleSearchDivIDPrefix || '' }google-search-box-${ suffix }`;
+  }
+
   renderPrimaryNavigation() {
     const { userIsSubscriber } = this.props;
     let { accordionData } = this.props;
@@ -283,7 +287,7 @@ export default class Navigation extends React.Component {
               renderCloseButton: false,
               className: 'navigation__search--inline',
               swapMagnifierAndSearchBar: true,
-              divID: 'google-search-box-hamburger-menu',
+              divID: this.googleSearchDivID('hamburger-menu'),
             })}
             <Accordion list={accordionData} />
           </div>
@@ -299,7 +303,7 @@ export default class Navigation extends React.Component {
       this.renderSearchBar({
         className: 'navigation__search--top-of-page',
         onCloseClick: this.handleCloseSearchBarClick,
-        divID: 'google-search-box-top-navigation',
+        divID: this.googleSearchDivID('top-navigation'),
       }) :
       this.renderPrimaryNavigation();
 
@@ -333,6 +337,7 @@ if (process.env.NODE_ENV !== 'production') {
     links: React.PropTypes.arrayOf(React.PropTypes.object),
     penName: React.PropTypes.string,
     svgUri: React.PropTypes.string,
+    googleSearchDivIDPrefix: React.PropTypes.string,
     userLoggedIn: React.PropTypes.bool,
     userIsSubscriber: React.PropTypes.bool,
     currentUrl: React.PropTypes.string,

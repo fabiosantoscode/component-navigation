@@ -209,6 +209,7 @@ export default (
         accordionData={accordionContext}
         moreBalloonData={moreBalloonData}
         sharedMenu={sharedMenu}
+        googleSearchDivIDPrefix={'b-'}
       />
       <p style={{ paddingBottom: '400px' }}>
         Scroll down to experience the thrill of sticky header technology
@@ -223,6 +224,7 @@ export default (
         accordionData={accordionContext}
         moreBalloonData={moreBalloonData}
         sharedMenu={sharedMenu}
+        googleSearchDivIDPrefix={'c-'}
       />
       <p style={{ paddingBottom: '400px' }}>
         Scroll down to experience the thrill of sticky header technology
