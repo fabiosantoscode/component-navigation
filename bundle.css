@@ -244,9 +244,7 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.navigation__user-menu .balloon__link,
-.navigation__user-menu-link--logout,
-.navigation__user-menu-link--login {
+.navigation__user-menu .balloon__link {
   height: 64px;
   white-space: nowrap;
 }
@@ -415,6 +413,13 @@ td.gsc-input {
 
 .navigation__search--inline .google-search {
   width: 100%;
+}
+
+.navigation__search--inline .gsc-input {
+
+  /* The same distance as the one between the compass and the right edge of the screen */
+
+  margin-left: 20px;
 }
 
 .navigation__search--inline .navigation__search-magnifier {
@@ -889,6 +894,38 @@ need to have a fixed height */
   }
   }
 
+/* Using specificity of 2 because component-icon overrides entire background property */
+
+.navigation__main-navigation-link-button.link-button {
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+}
+
+.navigation__main-navigation-link-button {
+  padding-right: 1.8em;
+  padding-left: 30px
+}
+
+@media (max-width: 860px) and (min-width: 769px) {
+
+  .navigation__main-navigation-link-button { /* stylelint-disable */ /* Shut up stylelint, this is beautiful. */
+    padding-right: 1.6em; /* stylelint-enable */
+  }
+  }
+
+.navigation__main-navigation-link-label {
+  line-height: 64px;
+  line-height: 64px
+}
+
+@media (max-width: 400px) {
+
+  .navigation__main-navigation-link-label {
+    display: none;
+  }
+  }
+
 @media (max-width: 400px) {
   .navigation .navigation__main-navigation-link-subscribe {
     display: none;
@@ -941,27 +978,6 @@ need to have a fixed height */
           align-items: center;
 }
 
-/* Using specificity of 2 because component-icon overrides entire background property */
-
-.navigation__main-navigation-link-button.link-button {
-  padding-left: 30px;
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-}
-
-.navigation__main-navigation-link-label {
-  line-height: 64px;
-  line-height: 64px
-}
-
-@media (max-width: 400px) {
-
-  .navigation__main-navigation-link-label {
-    display: none;
-  }
-  }
-
 .navigation__primary {
   display: table;
   width: 100%;
@@ -1007,6 +1023,12 @@ need to have a fixed height */
     padding: 0;
   }
   }
+
+/* Specificity of 2 to override media query in link-button */
+
+.navigation__main-navigation-link-button.navigation__main-navigation-link--search {
+  padding-right: 30px;
+}
 
 .navigation__user-menu-link.link-button--icon-background {
 }
