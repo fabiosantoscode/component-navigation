@@ -37,11 +37,18 @@
   height: var(--search__close-button-height, 64px);
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: 24px 24px;
+  background-size: var(--search-close-icon-size, 24px) var(--search-close-icon-size, 24px);
 }
 
 .navigation__search--inline .google-search {
   width: 100%;
+}
+
+.navigation__search--inline .gsc-input {
+
+  /* The same distance as the one between the compass and the right edge of the screen */
+
+  margin-left: calc(calc(var(--search__close-button-height, 64px) / 2) - calc(var(--search-close-icon-size, 24px) / 2));
 }
 
 .navigation__search--inline .navigation__search-magnifier {
