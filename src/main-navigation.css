@@ -27,11 +27,14 @@
 /* Using specificity of 2 because component-icon overrides entire background property */
 
 .navigation__main-navigation-link-button.link-button {
-  padding-right: calc(var(--main-navigation-link-padding) + var(--main-navigation-icon-link-padding-nudge, -0.2em));
-  padding-left: var(--main-navigation-link-icon-padding, 30px);
   background-position: left center;
   background-repeat: no-repeat;
   background-size: var(--main-navigation-link-icon-size, 24px) var(--main-navigation-link-icon-size, 24px);
+}
+
+.navigation__main-navigation-link-button {
+  padding-right: calc(var(--main-navigation-link-padding) + var(--main-navigation-icon-link-padding-nudge, -0.2em));
+  padding-left: var(--main-navigation-link-icon-padding, 30px);
 
   @media (--navigation-tablet-down) and (--navigation-mobile-up) {
     /* stylelint-disable */
@@ -130,9 +133,9 @@
   }
 }
 
-/* TODO omg specificity of 3! how! */
+/* Specificity of 2 to override media query in link-button */
 
-.navigation .navigation__main-navigation-link-button.navigation__main-navigation-link--search {
+.navigation__main-navigation-link-button.navigation__main-navigation-link--search {
   padding-right: 30px;
 }
 
