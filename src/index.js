@@ -173,6 +173,7 @@ export default class Navigation extends React.Component {
     onCloseClick,
     className,
     swapMagnifierAndSearchBar,
+    divID,
   } = {}) {
     const closeButton = renderCloseButton ? (
       <div className="navigation__search-close-button-wrapper">
@@ -188,7 +189,7 @@ export default class Navigation extends React.Component {
       <div className="navigation__search-magnifier icon--background icon--magnifier-london"></div>
     );
     let searchBar = (
-      <GoogleSearch autoFocus={autoFocus} />
+      <GoogleSearch divID={divID} autoFocus={autoFocus} />
     );
     if (swapMagnifierAndSearchBar) {
       [ magnifier, searchBar ] = [ searchBar, magnifier ];
@@ -282,6 +283,7 @@ export default class Navigation extends React.Component {
               renderCloseButton: false,
               className: 'navigation__search--inline',
               swapMagnifierAndSearchBar: true,
+              divID: 'google-search-box-hamburger-menu',
             })}
             <Accordion list={accordionData} />
           </div>
@@ -297,6 +299,7 @@ export default class Navigation extends React.Component {
       this.renderSearchBar({
         className: 'navigation__search--top-of-page',
         onCloseClick: this.handleCloseSearchBarClick,
+        divID: 'google-search-box-top-navigation',
       }) :
       this.renderPrimaryNavigation();
 
