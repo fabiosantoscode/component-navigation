@@ -1,139 +1,71 @@
 @import 'settings';
 @import '@economist/component-google-search';
 
-:root {
-  --navigation__search-default-width: 100px;
-  --navigation__search-default-width-mobile: 50px;
-  /* stylelint-disable */
-  /* legacy variable name needs to change someday (`navigation__search-label--font-size`) */
-  --search__search-label__font-size: var(--navigation-text-size);
-  /* stylelint-enable */
-}
-
 .navigation__search {
-  padding: 0 32px 0 var(--navigation__default-menus-padding, var(--main-navigation-link-padding));
-  flex: 0 1 auto;
-}
-
-.navigation__search--open,
-.navigation__search--closed {
-  display: table;
+  display: table-row;
   right: 10px;
   left: auto;
   height: var(--navigation__height, var(--navigation__default-height));
   border-collapse: collapse;
-  color: var(--search__color, var(--color-thimphu));
   font-size: 1em;
+  background: var(--navigation-search-color, var(--color-thimphu));
+}
+
+.navigation__search .google-search {
+  /* Override width: 100% */
+  width: auto;
+  /* Override default border-top. We'll do it if we want. */
+  border-top: none;
+}
+
+.navigation__search-magnifier,
+.navigation__search .google-search,
+.navigation__search-close-button-wrapper {
+  display: table-cell;
+}
+
+.navigation__search--top-of-page .navigation__search-magnifier,
+.navigation__search--top-of-page .google-search {
+  border-top: 1px solid var(--color-berlin);
+}
+
+/* Using specificity of 2 because component-icon CSS overrides the entire "background" property */
+
+.navigation__search .navigation__search-magnifier.icon--background,
+.navigation__search .navigation__search-close-button {
+  width: var(--search__close-button-height, 64px);
+  height: var(--search__close-button-height, 64px);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: var(--search-close-icon-size, 24px) var(--search-close-icon-size, 24px);
+}
+
+.navigation__search--inline .google-search {
+  width: 100%;
+}
+
+.navigation__search--inline .gsc-input {
+
+  /* The same distance as the one between the compass and the right edge of the screen */
+
+  margin-left: calc(calc(var(--search__close-button-height, 64px) / 2) - calc(var(--search-close-icon-size, 24px) / 2));
+}
+
+.navigation__search--inline .navigation__search-magnifier {
+  min-width: var(--search__close-button-height, 64px);
+}
+
+.navigation__search-close-button-wrapper {
+  width: var(--search__close-button-height, 64px);
+  color: var(--search__color, var(--color-thimphu));
+  background-color: var(--search-close__background, var(--color-kiev));
+}
+
+.navigation__search-close-button {
+  display: block;
 }
 
 .navigation__search .error--message {
   color: var(--color-economist);
 }
 
-.navigation__search-magnifier {
-  display: table-cell;
-  vertical-align: middle;
-  min-width: 50px;
-  text-align: center;
-  border-top: 1px solid var(--search__border-top-color, var(--color-berlin));
-}
-
-.navigation__collapsed-magnifier {
-  display: table-cell;
-  vertical-align: middle;
-  width: 64px;
-  min-width: 50px;
-  text-align: center;
-}
-
-/* stylelint-disable */
-.navigation__collapsed-magnifier use,
-.navigation__collapsed-magnifier svg {
-/* stylelint-enable */
-  fill: var(--color-thimphu);
-}
-
-.navigation__search--open {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: var(--search--open__background, var(--color-thimphu));
-}
-
-.navigation__show-field-group {
-  display: table-row;
-}
-
-.navigation__search-open-button.icon--magnifier-thimphu {
-  display: table-cell;
-  vertical-align: middle;
-  min-width: 50px;
-  height: var(--search__search-label__height, var(--text-size-step--1));
-  padding-left: 28px;
-
-  color: var(--search__color, var(--color-thimphu));
-  font-size: var(--search__search-label__font-size, var(--text-size-step--1));
-  text-align: center;
-  text-decoration: none;
-
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-}
-
-.navigation__search-close-button-wrapper {
-  display: flex;
-  box-sizing: border-box;
-  width: var(--search__close-button-height, 64px);
-  min-width: 50px;
-  height: var(--search__close-button-height, 64px);
-  background-color: var(--search-close__background, var(--color-kiev));
-}
-
-.navigation__search-close-button.icon--close-thimphu {
-  width: 100%;
-  height: 100%;
-  background-position: center center;
-  background-size: 24px 24px;
-}
-
-@media (--navigation-mobile-down) {
-  .navigation__search--open .navigation__search-open-button {
-    width: var(--navigation__height, var(--navigation__default-height));
-    height: var(--navigation__height, var(--navigation__default-height));
-  }
-}
-
-@media (--navigation-tablet-down) {
-  .navigation__search {
-    padding: 0;
-  }
-  .navigation__search-open-button {
-    min-width: 50px;
-    text-align: center;
-  }
-  .navigation__collapsed-magnifier {
-    display: table-cell;
-  }
-  .navigation__show-field-group .navigation__search-open-button {
-    display: none;
-  }
-}
-
-@media (--navigation-tablet-up) {
-  .navigation__collapsed-magnifier {
-    display: none;
-  }
-  .navigation__show-field-group .navigation__search-open-button {
-    display: table-cell;
-  }
-}
-
-/* Bring Google Search on front */
-/* stylelint-disable */
-.gssb_c {
-/* stylelint-enable */
-  z-index: 10000000;
-}

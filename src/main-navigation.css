@@ -7,36 +7,63 @@
   --main-navigation-link-padding: 2em;
 }
 
-.navigation__main-navigation-link {
+.navigation__main-navigation-link,
+.navigation__main-navigation-link-button {
+  display: block;
+  height: var(--navigation__default-height);
   padding: 0 var(--main-navigation-link-padding);
-  align-self: center;
   color: var(--navigation-link-color);
   font-size: var(--navigation-text-size);
+  line-height: var(--navigation__default-height);
+  text-decoration: none;
   white-space: nowrap;
 
   @media (--navigation-tablet-down) and (--navigation-mobile-up) {
-    padding-right: 1.8em;
-    padding-left: 1.8em;
+    padding-right: var(--main-navigation-link-padding-mobile, 1.8em);
+    padding-left: var(--main-navigation-link-padding-mobile, 1.8em);
   }
 }
 
-/* stylelint-disable selector-no-type */
+/* Using specificity of 2 because component-icon overrides entire background property */
 
-.navigation__main-navigation-link > a {
-  /* stylelint-enable selector-no-type  */
-  color: var(--navigation-link-color);
-  white-space: nowrap;
+.navigation__main-navigation-link-button.link-button {
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: var(--main-navigation-link-icon-size, 24px) var(--main-navigation-link-icon-size, 24px);
 }
 
-.navigation__sections-link {
-  position: relative;
-  height: 100%;
-  color: var(--color-thimphu);
-  text-decoration: none;
+.navigation__main-navigation-link-button {
+  padding-right: calc(var(--main-navigation-link-padding) + var(--main-navigation-icon-link-padding-nudge, -0.2em));
+  padding-left: var(--main-navigation-link-icon-padding, 30px);
+
+  @media (--navigation-tablet-down) and (--navigation-mobile-up) {
+    /* stylelint-disable */
+    /* Shut up stylelint, this is beautiful. */
+    padding-right: calc(
+      var(--main-navigation-link-padding-mobile, 1.8em) + var(--main-navigation-icon-link-padding-nudge, -0.2em)
+    );
+    /* stylelint-enable */
+  }
 }
 
-.navigation__main-navigation-link-subscribe {
-  font-family: var(--fontfamily-sans);
+.navigation__main-navigation-link-label {
+  line-height: var(--navigation__default-height, 64px);
+
+  @media (--navigation-small-mobile-down) {
+    display: none;
+  }
+}
+
+@media (--navigation-small-mobile-down) {
+  .navigation .navigation__main-navigation-link-subscribe {
+    display: none;
+  }
+}
+
+@media (--navigation-small-mobile-up) {
+  .navigation .navigation__mobile-accordion-link--subscribe {
+    display: none;
+  }
 }
 
 .navigation__main-sections-card .balloon-content {
@@ -62,8 +89,18 @@
   }
 }
 
-.navigation__main-navigation-link,
-.navigation__sections-link {
+/* stylelint-disable selector-no-universal */
+
+.navigation__main-navigation-link > * {
+
+  /* Some links are balloons, so they have children, which is why we need to reset this. */
+
+  line-height: normal;
+}
+
+/* stylelint-enable selector-no-universal */
+
+.navigation__main-navigation-link {
   display: flex;
   align-items: center;
 }
@@ -74,7 +111,6 @@
   height: var(--navigation__default-height);
   line-height: 1em;
   background: var(--color-kiev);
-  z-index: 2;
 }
 
 /* stylelint-disable declaration-block-no-duplicate-properties, selector-no-universal */
@@ -82,7 +118,6 @@
 .navigation__primary-inner {
   display: table-row;
   display: flex;
-  position: relative;
   height: var(--navigation__default-height);
 }
 
@@ -96,18 +131,17 @@
 
 /* stylelint-enable declaration-block-no-duplicate-properties, selector-no-universal */
 
-.navigation__user-menu-link-label {
-
-  @media (--navigation-small-mobile-down) {
-    display: none;
-  }
-}
-
 .navigation__user-menu {
 
   @media (--navigation-small-mobile-down) {
     padding: 0;
   }
+}
+
+/* Specificity of 2 to override media query in link-button */
+
+.navigation__main-navigation-link-button.navigation__main-navigation-link--search {
+  padding-right: 30px;
 }
 
 .navigation__user-menu-link.link-button--icon-background {
@@ -140,3 +174,4 @@
     left: 0;
   }
 }
+

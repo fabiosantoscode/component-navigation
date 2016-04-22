@@ -11,8 +11,11 @@ chai.use(chaiEnzyme()).should();
 describe('Navigation', () => {
   let props = null;
   let registered = null;
+  let testNumber = 0;
   beforeEach(() => {
+    testNumber++;
     props = {
+      googleSearchDivIDPrefix: `test-${ testNumber }-`,
       moreBalloonData,
       sectionsCardData,
       links: registered,
@@ -100,7 +103,7 @@ describe('Navigation', () => {
       rendered.find('.navigation__main-navigation-link-subscribe').should.not.be.present();
     });
 
-    it('renders links in mobile menu with `hideWhenSubscribed: true` when `userIsSubscriber` not set', () => {
+    it('renders links in mobile menu with `isSubscriberLink: true` when `userIsSubscriber` not set', () => {
       rendered = mount(<Navigation {...props} />);
       const mobileMenu = rendered.find('.navigation__primary-inner').find('.accordion');
       mobileMenu.should.have.exactly(5).descendants('.list__item');
@@ -108,8 +111,8 @@ describe('Navigation', () => {
         .should.have.text('Subscribe');
     });
 
-    it('does not render links in mobile menu with `hideWhenSubscribed: true` when `userIsSubscriber` is set', () => {
-      props.accordionData[4].hideWhenSubscribed = true;
+    it('does not render links in mobile menu with `isSubscriberLink: true` when `userIsSubscriber` is set', () => {
+      props.accordionData[4].isSubscriberLink = true;
       rendered = mount(<Navigation {...props} userIsSubscriber />);
       const mobileMenu = rendered.find('.navigation__primary-inner').find('.accordion');
       mobileMenu.should.have.exactly(4).descendants('.list__item');
