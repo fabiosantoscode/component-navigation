@@ -932,6 +932,12 @@ need to have a fixed height */
   }
 }
 
+@media (min-width: 401px) {
+  .navigation .navigation__mobile-accordion-link--subscribe {
+    display: none;
+  }
+}
+
 .navigation__main-sections-card .balloon-content {
   right: 0;
   left: 0;
