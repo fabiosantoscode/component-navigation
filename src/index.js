@@ -222,11 +222,23 @@ export default class Navigation extends React.Component {
     const { userIsSubscriber } = this.props;
     let { accordionData } = this.props;
     const svgUri = { uri: this.props.svgUri } || {};
-    if (userIsSubscriber) {
-      accordionData = accordionData.filter((accordionLink) => (
-        accordionLink.hideWhenSubscribed !== true
-      ));
-    }
+    accordionData = accordionData.map((accordionLink) => {
+      if (accordionLink.isSubscriberLink) {
+        if (userIsSubscriber) {
+          return null;
+        }
+        const classNames = (
+          accordionLink.className ? [ accordionLink.className ] : []
+        ).concat([
+          'navigation__mobile-accordion-link--subscribe',
+        ]);
+        return {
+          ...accordionLink,
+          className: classNames.join(' '),
+        };
+      }
+      return accordionLink;
+    }).filter((link) => Boolean(link));
 
     const menuAccordionTrigger = (
       <a

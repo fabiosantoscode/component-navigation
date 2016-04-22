@@ -179,7 +179,7 @@ const accordionContext = [
     title: sharedMenu.subscribe.title,
     href: sharedMenu.subscribe.href,
     target: '_blank',
-    hideWhenSubscribed: true,
+    isSubscriberLink: true,
     unstyled: false,
     i13nModel: { // eslint-disable-line id-match
       action: 'click',

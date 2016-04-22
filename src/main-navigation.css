@@ -60,6 +60,12 @@
   }
 }
 
+@media (--navigation-small-mobile-up) {
+  .navigation .navigation__mobile-accordion-link--subscribe {
+    display: none;
+  }
+}
+
 .navigation__main-sections-card .balloon-content {
   right: 0;
   left: 0;
