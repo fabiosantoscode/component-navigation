@@ -257,7 +257,6 @@ body {
   line-height: normal;
   line-height: initial;
   text-align: center;
-  z-index: 2;
 }
 
 .navigation__user-menu-popup--anonymous .balloon-content {
@@ -438,15 +437,6 @@ td.gsc-input {
 
 .navigation__search .error--message {
   color: #e3120b;
-}
-
-/* Bring Google Search on front */
-
-/* stylelint-disable */
-
-.gssb_c {
-/* stylelint-enable */
-  z-index: 10000000;
 }
 
 .accordion-expander--visible > .link-button--icon > .link-button__group .Icon-down {
@@ -990,7 +980,6 @@ need to have a fixed height */
   height: 64px;
   line-height: 1em;
   background: #383e42;
-  z-index: 2;
 }
 
 /* stylelint-disable declaration-block-no-duplicate-properties, selector-no-universal */
@@ -1458,7 +1447,6 @@ need to have a fixed height */
   font-family: 'EconSans', Tahoma, sans-serif;
   font-size: 18px;
   font-size: 1rem;
-  z-index: 10000000;
 }
 
 /* stylelint-disable selector-no-type */
