@@ -19,7 +19,6 @@
   font-size: 0.8em;
   line-height: initial;
   text-align: center;
-  z-index: 2;
 }
 
 .navigation__user-menu-popup--anonymous .balloon-content {

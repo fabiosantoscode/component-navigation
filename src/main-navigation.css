@@ -111,7 +111,6 @@
   height: var(--navigation__default-height);
   line-height: 1em;
   background: var(--color-kiev);
-  z-index: 2;
 }
 
 /* stylelint-disable declaration-block-no-duplicate-properties, selector-no-universal */

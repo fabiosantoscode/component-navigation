@@ -69,9 +69,3 @@
   color: var(--color-economist);
 }
 
-/* Bring Google Search on front */
-/* stylelint-disable */
-.gssb_c {
-/* stylelint-enable */
-  z-index: 10000000;
-}
