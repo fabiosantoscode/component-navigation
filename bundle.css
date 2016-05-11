@@ -1557,10 +1557,6 @@ need to have a fixed height */
 }
 
 .navigation__link-logo .Icon {
-
-  /* Go around a flex bug in IE by setting a minimum width */
-
-  min-width: 96px;
   height: 48px
 }
 
@@ -1568,8 +1564,20 @@ need to have a fixed height */
 
   .navigation__link-logo .Icon {
     width: auto;
-    min-width: 128px;
     height: 64px;
+  }
+  }
+
+.navigation__link-logo {
+  /* Go around a flex bug in IE by setting a minimum width */
+
+  min-width: 96px
+}
+
+@media (min-width: 769px) {
+
+  .navigation__link-logo {
+    min-width: 128px;
   }
   }
 
