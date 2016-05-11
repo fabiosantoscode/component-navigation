@@ -69,7 +69,10 @@
   height: var(--navigation-height);
 
   @media (--navigation-mobile-up) {
-    width: auto;
+
+    /* Explicitly setting the width fixes safari icon size. */
+
+    width: 128px;
     height: var(--navigation-desktop-height);
   }
 }
