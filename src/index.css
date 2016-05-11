@@ -71,7 +71,16 @@
   @media (--navigation-mobile-up) {
     width: auto;
     height: var(--navigation-desktop-height);
-    x-min-width: 128px;
+  }
+}
+
+.navigation__link-logo {
+  /* Go around a flex bug in IE by setting a minimum width */
+
+  min-width: 96px;
+
+  @media (--navigation-mobile-up) {
+    min-width: 128px;
   }
 }
 
