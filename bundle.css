@@ -1562,8 +1562,8 @@ need to have a fixed height */
 
 @media (min-width: 769px) {
 
-  .navigation__link-logo .Icon {
-    width: auto;
+  .navigation__link-logo .Icon { /* Explicitly setting the width fixes safari icon size. */
+    width: 128px;
     height: 64px;
   }
   }
