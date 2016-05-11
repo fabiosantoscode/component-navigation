@@ -16,8 +16,13 @@
 @import '@economist/component-icon/backgrounds/video.css';
 
 .navigation {
+  height: var(--navigation-height);
   font-family: var(--fontfamily-sans);
   font-size: 1rem;
+
+  @media (--navigation-mobile-up) {
+    height: var(--navigation-desktop-height);
+  }
 }
 
 /* stylelint-disable selector-no-type */
@@ -60,20 +65,24 @@
   position: static;
 }
 
-@media (--navigation-mobile-up) {
-  .navigation__link-logo {
-    min-width: 128px;
-  }
-}
+.navigation__link-logo .Icon {
+  height: var(--navigation-height);
 
-.navigation__link-logo {
-  height: var(--navigation__default-height);
+  @media (--navigation-mobile-up) {
+    width: auto;
+    height: var(--navigation-desktop-height);
+    x-min-width: 128px;
+  }
 }
 
 .navigation__primary .navigation__main-sections-card .balloon--content {
   /* Stop this from being taller than screen */
   overflow-y: auto;
-  max-height: calc(100vh - var(--navigation__default-height));
+  max-height: calc(100vh - var(--navigation-height));
+
+  @media (--navigation-mobile-up) {
+    max-height: calc(100vh - var(--navigation-desktop-height));
+  }
 }
 
 .navigation .balloon--not-visible {
